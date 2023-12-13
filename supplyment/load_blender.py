@@ -70,6 +70,8 @@ def load_blender_data(basedir, half_res=False, testskip=1):
     i_split = [np.arange(counts[i], counts[i+1]) for i in range(3)]
     
     imgs = np.concatenate(all_imgs, 0)
+    Image.fromarray(imgs, 'RGBA').convert('RGB').save("checks.jpg")
+
     poses = np.concatenate(all_poses, 0)
     
     H, W = imgs[0].shape[:2]
