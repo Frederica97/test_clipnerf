@@ -5,6 +5,8 @@ import imageio
 import json
 import torch.nn.functional as F
 import cv2
+from PIL import Image
+
 
 
 trans_t = lambda t : torch.Tensor([
@@ -56,7 +58,9 @@ def load_blender_data(basedir, half_res=False, testskip=1):
         for frame in meta['frames'][::skip]:
             fname = os.path.join(basedir, frame['file_path'] + '.png')
             image_array = imageio.imread(fname)
-            imageio.imwrite("check.jpg", image_array.astype(np.uint8))
+            img = Image.fromarray(image_array, 'RGBA')
+            rgb_img = img.convert('RGB')
+            rgb_img.save("check.jpg")
             imgs.append(image_array)
             poses.append(np.array(frame['transform_matrix']))
         imgs = (np.array(imgs) / 255.).astype(np.float32) # keep all 4 channels (RGBA)
