@@ -58,7 +58,7 @@ def load_blender_data(basedir, half_res=False, testskip=1):
         for frame in meta['frames'][::skip]:
             fname = os.path.join(basedir, frame['file_path'] + '.png')
             image_array = imageio.imread(fname)
-            Image.fromarray(image_array, 'RGBA').convert('RGB').save("check.jpg")
+            # Image.fromarray(image_array, 'RGBA').convert('RGB').save("check.jpg")
             imgs.append(image_array)
             poses.append(np.array(frame['transform_matrix']))
         imgs = (np.array(imgs) / 255.).astype(np.float32) # keep all 4 channels (RGBA)
@@ -70,7 +70,7 @@ def load_blender_data(basedir, half_res=False, testskip=1):
     i_split = [np.arange(counts[i], counts[i+1]) for i in range(3)]
     
     imgs = np.concatenate(all_imgs, 0)
-    Image.fromarray(imgs, 'RGBA').convert('RGB').save("checks.jpg")
+    # Image.fromarray(imgs, 'RGBA').convert('RGB').save("checks.jpg")
 
     poses = np.concatenate(all_poses, 0)
     
@@ -87,10 +87,10 @@ def load_blender_data(basedir, half_res=False, testskip=1):
 
         imgs_half_res = np.zeros((imgs.shape[0], H, W, 4))
         for i, img in enumerate(imgs):
-            Image.fromarray(img, 'RGBA').convert('RGB').save("check3.jpg")
+            # Image.fromarray(img, 'RGBA').convert('RGB').save("check3.jpg")
 
             imgs_half_res[i] = cv2.resize(img, (W, H), interpolation=cv2.INTER_AREA)
-            Image.fromarray(img, 'RGBA').convert('RGB').save("check2.jpg")
+            # Image.fromarray(img, 'RGBA').convert('RGB').save("check2.jpg")
 
         imgs = imgs_half_res
         # imgs = tf.image.resize_area(imgs, [400, 400]).numpy()
