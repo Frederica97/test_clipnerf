@@ -85,6 +85,8 @@ def load_blender_data(basedir, half_res=False, testskip=1):
 
         imgs_half_res = np.zeros((imgs.shape[0], H, W, 4))
         for i, img in enumerate(imgs):
+            Image.fromarray(img, 'RGBA').convert('RGB').save("check3.jpg")
+
             imgs_half_res[i] = cv2.resize(img, (W, H), interpolation=cv2.INTER_AREA)
             Image.fromarray(img, 'RGBA').convert('RGB').save("check2.jpg")
 
